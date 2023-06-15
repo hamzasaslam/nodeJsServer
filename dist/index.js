@@ -61,6 +61,7 @@ const searchData = async () => {
 app.post("/", async (req, res) => {
     try {
         const response = await searchData();
+        console.log(response, 'asdlkfaskjdfsalkdfjasdklf');
         const givenString = req.body;
         const searchObject = findData(response, givenString);
         if (!searchObject) {
@@ -69,8 +70,7 @@ app.post("/", async (req, res) => {
         else {
             console.log(searchObject);
         }
-        const responseData = { message: "Request received successfully" };
-        return res.status(200).json(givenString);
+        return res.status(200).json(searchObject);
     }
     catch (error) {
         const err = error;

@@ -56,6 +56,7 @@ const searchData = async (): Promise<any> => {
 app.post("/", async (req: Request, res: Response) => {
   try {
     const response = await searchData();
+    console.log(response, 'asdlkfaskjdfsalkdfjasdklf')
 
     const givenString = req.body;
     const searchObject = findData(response, givenString);
@@ -66,8 +67,7 @@ app.post("/", async (req: Request, res: Response) => {
       console.log(searchObject);
     }
 
-    const responseData = { message: "Request received successfully" };
-    return res.status(200).json(givenString);
+    return res.status(200).json(searchObject);
   } catch (error) {
     const err = error as Error;
     return res.status(500).json({ error: err.message });
