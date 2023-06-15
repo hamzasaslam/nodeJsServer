@@ -53,12 +53,14 @@ const searchData = async (): Promise<any> => {
   return response.data;
 };
 
-app.post("/", async (req: Request, res: Response) => {
+app.post("/data", async (req: Request, res: Response) => {
   try {
     const response = await searchData();
   
-    const givenString = req.body;
+    const givenString = req.body.value;
+    console.log("I am here", givenString)
     const searchObject = findData(response, givenString);
+
 
     if (!searchObject) {
       return res.status(200).json({
