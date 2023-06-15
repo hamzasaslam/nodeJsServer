@@ -56,18 +56,19 @@ const searchData = async (): Promise<any> => {
 app.post("/", async (req: Request, res: Response) => {
   try {
     const response = await searchData();
-    console.log(response, 'asdlkfaskjdfsalkdfjasdklf')
-
+  
     const givenString = req.body;
     const searchObject = findData(response, givenString);
 
     if (!searchObject) {
-      console.log("Value not found");
+      return res.status(200).json({
+        message: 'not found'
+      }) 
     } else {
       console.log(searchObject);
+      return res.status(200).json(searchObject);
     }
 
-    return res.status(200).json(searchObject);
   } catch (error) {
     const err = error as Error;
     return res.status(500).json({ error: err.message });
